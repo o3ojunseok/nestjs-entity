@@ -18,7 +18,10 @@ export class UserRepository extends Repository<User> {
 
     try {
       console.log('save',createData);
+      await queryRunner.manager.create(User, createData);
+      console.log('createUser')
       await queryRunner.manager.save(createData);
+      console.log('saveUser');
       await queryRunner.commitTransaction();
     } catch (err){
       await queryRunner.rollbackTransaction();
